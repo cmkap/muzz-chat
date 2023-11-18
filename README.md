@@ -48,6 +48,17 @@
 2. Run development server: `npm run dev`
 3. Build for production: `npm run build`
 
+
+## Default Usernames for Testing
+
+- **Username**: John
+- **Password**: (can be anything)
+
+- **Username**: Jane
+- **Password**: (can be anything)
+
+Please use the provided default usernames (John and Jane) for testing purposes. You can set any password when logging in.
+
 ## Additional Notes
 
 - Make sure the server is running before using the chat application.
