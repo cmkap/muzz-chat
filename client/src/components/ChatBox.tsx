@@ -1,17 +1,16 @@
 import { Button, HStack, Input } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
-import { useContext,  } from "react";
+import { useContext } from "react";
 import * as Yup from "yup";
 import socket from "../socket";
 import OnlineUserContext from "../state-management/contexts/onlineUsersContext";
-import useMessages from "../hooks/useMessages";
-
-
-
+// import useMessages from "../hooks/useMessages";
+import useMessagesStore from "../state-management/messages/store";
 
 const ChatBox = () => {
   const { user } = useContext(OnlineUserContext);
-  const { dispatch } = useMessages()
+  // const { dispatch } = useMessages();
+  const { add  } = useMessagesStore();
 
   const receiver = user.id !== "john" ? "john" : "jane";
 
@@ -30,7 +29,8 @@ const ChatBox = () => {
         };
 
         socket.emit("sendMessage", { ...message, recipientId: receiver });
-        dispatch({type: "ADD", message})
+        // dispatch({ type: "ADD", message });
+        add(message)
 
         actions.resetForm();
       }}

@@ -4,10 +4,12 @@ import moment from "moment";
 import ChatBox from "./ChatBox";
 import OnlineUserContext from "../state-management/contexts/onlineUsersContext";
 import useMessages from "../hooks/useMessages";
+import useMessagesStore from "../state-management/messages/store";
 
 const Chat = () => {
   const { onlineUsers, user } = useContext(OnlineUserContext);
-  const { messages } = useMessages()
+  // const { messages } = useMessages()
+  const {messages} = useMessagesStore()
   const bottomDiv = useRef(null);
 
   useEffect(() => {

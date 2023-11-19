@@ -4,12 +4,15 @@ import socket from "../socket";
 
 import { Message } from "../state-management/reducers/messagesReducer";
 import onlinUsersReducer from "../state-management/reducers/onlineUsersReducer";
+import useMessagesStore from "../state-management/messages/store";
 
 const useSocketSetup = (user, dispatchMessage) => {
+  const { add } = useMessagesStore();
   const [onlineUsers, dispatch] = useReducer(onlinUsersReducer, []);
 
   const handleMessage = useCallback((msg: Message) => {
-    dispatchMessage({ type: "ADD", message: { ...msg } });
+    // dispatchMessage({ type: "ADD", message: { ...msg } });
+    add({ ...msg });
   }, []);
 
   useEffect(() => {
