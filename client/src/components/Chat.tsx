@@ -5,12 +5,17 @@ import ChatBox from "./ChatBox";
 import OnlineUserContext from "../state-management/contexts/onlineUsersContext";
 import useMessages from "../hooks/useMessages";
 import useMessagesStore from "../state-management/messages/store";
+import useAuthStore from "../state-management/auth/store";
+import useOnlineUsersStore from "../state-management/onlineUsers/store";
 
 const Chat = () => {
-  const { onlineUsers, user } = useContext(OnlineUserContext);
+  // const { onlineUsers } = useContext(OnlineUserContext);
+  const { onlineUsers } = useOnlineUsersStore();
+  const { user } = useAuthStore();
   // const { messages } = useMessages()
-  const {messages} = useMessagesStore()
+  const { messages } = useMessagesStore();
   const bottomDiv = useRef(null);
+  console.log('messages',messages)
 
   useEffect(() => {
     bottomDiv.current?.scrollIntoView();

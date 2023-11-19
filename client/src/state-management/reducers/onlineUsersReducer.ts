@@ -1,5 +1,5 @@
 export interface OnlineUser {
-  userId: string;
+  id: string;
   socketId: string;
 }
 

@@ -14,17 +14,22 @@ import { MatchContext } from "../pages/ChatPage";
 import Jane from "../assets/jane.png";
 import John from "../assets/john.png";
 import OnlineUserContext from "../state-management/contexts/onlineUsersContext";
+import useOnlineUsersStore from "../state-management/onlineUsers/store";
+import useAuthStore from "../state-management/auth/store";
 
 const ChatList = () => {
-  const {  onlineUsers, user } = useContext(OnlineUserContext);
+  // const {  onlineUsers } = useContext(OnlineUserContext);
+
+  const { onlineUsers } = useOnlineUsersStore();
+  const { user } = useAuthStore();
 
   const updatedUsers = onlineUsers
     .map((u) => ({
       ...u,
-      name: u.userId,
-      image: u.userId === "jane" ? Jane : John,
+      name: u.id,
+      image: u.id === "jane" ? Jane : John,
     }))
-    .filter((u) => u.userId !== user.id);
+    .filter((u) => u.id !== user?.id);
 
   return (
     <VStack py="1rem" align="stretch">

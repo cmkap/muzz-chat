@@ -3,9 +3,11 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import TextField from "../components/TextField";
 import { NavigateOptions, useNavigate } from "react-router-dom";
+import useAuthStore from "../state-management/auth/store";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuthStore();
   return (
     <Formik
       initialValues={{
@@ -22,8 +24,9 @@ const Login = () => {
         const id = username.toLowerCase();
 
         if (id === "john" || id === "jane") {
+          login({ id, name: id, isConnected: true })
           navigate("/chat", {
-            state: { user: { id, name: id, isConnected: true } },
+            // state: { user: { id, name: id, isConnected: true } },
           });
 
           return;

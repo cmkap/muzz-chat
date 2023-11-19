@@ -34,7 +34,7 @@ io.on("connect", (socket) => {
     if (!onlineUsers.some((user: any) => user.userId === userId)) {
       // If not, add the user to the list
       onlineUsers.push({
-        userId,
+        id: userId,
         socketId: socket.id,
       });
 
@@ -46,7 +46,7 @@ io.on("connect", (socket) => {
     socket.on("sendMessage", (message) => {
   
       const user = onlineUsers.find(
-        (u: any) => u.userId === message.recipientId
+        (u: any) => u.id === message.recipientId
       );
 
 

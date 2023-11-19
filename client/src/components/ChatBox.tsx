@@ -6,13 +6,16 @@ import socket from "../socket";
 import OnlineUserContext from "../state-management/contexts/onlineUsersContext";
 // import useMessages from "../hooks/useMessages";
 import useMessagesStore from "../state-management/messages/store";
+import useAuthStore from "../state-management/auth/store";
 
 const ChatBox = () => {
-  const { user } = useContext(OnlineUserContext);
+  // const { user } = useContext(OnlineUserContext);
+  const {user } = useAuthStore()
   // const { dispatch } = useMessages();
   const { add  } = useMessagesStore();
+  console.log('chatboxUser', user)
 
-  const receiver = user.id !== "john" ? "john" : "jane";
+  const receiver = user?.id !== "john" ? "john" : "jane";
 
   return (
     <Formik
