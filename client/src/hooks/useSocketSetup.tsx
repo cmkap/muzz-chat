@@ -5,10 +5,12 @@ import socket from "../socket";
 import { Message } from "../state-management/reducers/messagesReducer";
 import onlinUsersReducer from "../state-management/reducers/onlineUsersReducer";
 import useMessagesStore from "../state-management/messages/store";
+import useOnlineUsersStore from "../state-management/onlineUsers/store";
 
 const useSocketSetup = (user, dispatchMessage) => {
   const { add } = useMessagesStore();
-  const [onlineUsers, dispatch] = useReducer(onlinUsersReducer, []);
+  const {add: addOnline, onlineUsers } = useOnlineUsersStore()
+  // const [onlineUsers, dispatch] = useReducer(onlinUsersReducer, []);
 
   const handleMessage = useCallback((msg: Message) => {
     // dispatchMessage({ type: "ADD", message: { ...msg } });
@@ -19,7 +21,9 @@ const useSocketSetup = (user, dispatchMessage) => {
     socket.connect();
     socket.emit("addNewUser", user?.id);
     socket.on("getOnlineUsers", (res) => {
-      dispatch({ type: "ADD", onlineUsers: res });
+      // dispatch({ type: "ADD", onlineUsers: res });
+      addOnline(res)
+
     });
 
     socket.on("connect_error", () => {
