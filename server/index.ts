@@ -1,5 +1,5 @@
 import express, { Express } from "express";
-import { Server as SocketIOServer, Socket } from "socket.io";
+import { Server as SocketIOServer } from "socket.io";
 import http from "http";
 import helmet from "helmet";
 import cors from "cors";
@@ -37,24 +37,16 @@ io.on("connect", (socket) => {
         id: userId,
         socketId: socket.id,
       });
-
-
     }
 
     io.emit("getOnlineUsers", onlineUsers);
 
     socket.on("sendMessage", (message) => {
-  
-      const user = onlineUsers.find(
-        (u: any) => u.id === message.recipientId
-      );
-
-
+      const user = onlineUsers.find((u: any) => u.id === message.recipientId);
 
       if (user) {
         io.to(user.socketId).emit("getMessage", message);
       }
-
     });
     socket.on("disconnect", () => {
       onlineUsers = onlineUsers.filter((u: any) => u.socketId !== socket.id);
@@ -67,5 +59,3 @@ io.on("connect", (socket) => {
 server.listen(4000, () => {
   console.log("Server listening on port 4000");
 });
-
-

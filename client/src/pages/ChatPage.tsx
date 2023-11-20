@@ -13,6 +13,7 @@ function ChatPage() {
   const { onlineUsers } = useOnlineUsersStore();
 
   const { userProfile, profileImage } = userProfiles(user);
+  
   useSocketSetup(user);
 
   const match = onlineUsers.find((u) => u.id !== user?.id);

@@ -1,5 +1,9 @@
 import { create } from "zustand";
-import { OnlineUser } from "../reducers/onlineUsersReducer";
+export interface OnlineUser {
+    id: string;
+    socketId: string;
+  }
+  
 
 interface OnlineUsersStore {
   onlineUsers: OnlineUser[];

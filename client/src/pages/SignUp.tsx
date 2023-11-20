@@ -21,7 +21,7 @@ const SignUp = () => {
         actions.resetForm();
       }}
     >
-      {(formik) => (
+      {() => (
         <VStack
           as={Form}
           w={{ base: "90%", md: "500px" }}

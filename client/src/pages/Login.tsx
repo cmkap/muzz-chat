@@ -2,7 +2,7 @@ import { ButtonGroup, VStack, Button, Heading } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import TextField from "../components/TextField";
-import { NavigateOptions, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useAuthStore from "../state-management/auth/store";
 
 const Login = () => {

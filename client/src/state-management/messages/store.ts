@@ -1,5 +1,10 @@
 import { create } from "zustand";
-import { Message } from "../reducers/messagesReducer";
+export interface Message {
+    to: string
+    from?: string
+    content: string
+    timeStamp: number
+  }
 
 interface MessagesStore {
   messages: Message[];
