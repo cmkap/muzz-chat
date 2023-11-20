@@ -1,6 +1,6 @@
 export interface Message {
   to: string
-  from: string
+  from?: string
   content: string
   timeStamp: number
 }

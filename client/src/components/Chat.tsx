@@ -1,6 +1,7 @@
-import { VStack, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
 import React, { useEffect, useRef } from "react";
+import { VStack, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
 import moment from "moment";
+
 import ChatBox from "./ChatBox";
 import useMessagesStore from "../state-management/messages/store";
 import useAuthStore from "../state-management/auth/store";
@@ -17,7 +18,7 @@ const Chat = () => {
   useEffect(() => {
     bottomDiv.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-  
+
   const formatMessageDate = (timestamp: number) => {
     const messageTime = moment(timestamp);
     const now = moment();
@@ -27,7 +28,7 @@ const Chat = () => {
       // Show date and time if more than 1 hour
       return `${moment().calendar()}`;
     } else {
-      // Don'tif within 1 hours
+      // Don't show if within 1 hour
       return;
     }
   };
