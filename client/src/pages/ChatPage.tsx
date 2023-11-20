@@ -1,14 +1,9 @@
 import { Grid, GridItem, Show, Tabs, TabList, Tab } from "@chakra-ui/react";
+
 import Profile from "../components/Profile";
 import ChatList from "../components/ChatList";
 import Chat from "../components/Chat";
-
 import useSocketSetup from "../hooks/useSocketSetup";
-import { useLocation } from "react-router-dom";
-
-import OnlineUserContext from "../state-management/contexts/onlineUsersContext";
-import MessagesProvider from "../state-management/MessagesProvider";
-import useMessages from "../hooks/useMessages";
 import { userProfiles } from "../utils/userProfiles";
 import useAuthStore from "../state-management/auth/store";
 import useOnlineUsersStore from "../state-management/onlineUsers/store";
@@ -16,8 +11,6 @@ import useOnlineUsersStore from "../state-management/onlineUsers/store";
 function ChatPage() {
   const { user } = useAuthStore();
   const { onlineUsers } = useOnlineUsersStore();
-  const { dispatch } = useMessages();
-  const location = useLocation();
 
   const { userProfile, profileImage } = userProfiles(user);
   useSocketSetup(user);
@@ -26,13 +19,7 @@ function ChatPage() {
   const profileMatch = { ...match, image: profileImage };
 
   return (
-    <MessagesProvider>
-      {/* <OnlineUserContext.Provider
-        value={{
-          onlineUsers,
-          user,
-        }}
-      > */}
+    
       <Grid
         templateAreas={{
           base: `"user user" "tab tab" "main main"`,
@@ -81,8 +68,6 @@ function ChatPage() {
           <Chat />
         </GridItem>
       </Grid>
-      {/* </OnlineUserContext.Provider> */}
-    </MessagesProvider>
   );
 }
 

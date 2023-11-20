@@ -8,18 +8,14 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { ChatIcon } from "@chakra-ui/icons";
+
 import Profile from "./Profile";
-import { useContext } from "react";
-import { MatchContext } from "../pages/ChatPage";
 import Jane from "../assets/jane.png";
 import John from "../assets/john.png";
-import OnlineUserContext from "../state-management/contexts/onlineUsersContext";
 import useOnlineUsersStore from "../state-management/onlineUsers/store";
 import useAuthStore from "../state-management/auth/store";
 
 const ChatList = () => {
-  // const {  onlineUsers } = useContext(OnlineUserContext);
-
   const { onlineUsers } = useOnlineUsersStore();
   const { user } = useAuthStore();
 
