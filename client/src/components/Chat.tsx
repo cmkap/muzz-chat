@@ -1,26 +1,24 @@
 import { VStack, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import moment from "moment";
 import ChatBox from "./ChatBox";
-import OnlineUserContext from "../state-management/contexts/onlineUsersContext";
-import useMessages from "../hooks/useMessages";
 import useMessagesStore from "../state-management/messages/store";
 import useAuthStore from "../state-management/auth/store";
 import useOnlineUsersStore from "../state-management/onlineUsers/store";
 
 const Chat = () => {
-  // const { onlineUsers } = useContext(OnlineUserContext);
   const { onlineUsers } = useOnlineUsersStore();
   const { user } = useAuthStore();
-  // const { messages } = useMessages()
   const { messages } = useMessagesStore();
-  const bottomDiv = useRef(null);
-  console.log('messages',messages)
+
+  const bottomDiv = useRef<HTMLDivElement | null>(null);
+
 
   useEffect(() => {
-    bottomDiv.current?.scrollIntoView();
-  });
-  const formatMessageDate = (timestamp) => {
+    bottomDiv.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+  
+  const formatMessageDate = (timestamp: number) => {
     const messageTime = moment(timestamp);
     const now = moment();
     const diffInHours = now.diff(messageTime, "hours");
@@ -50,13 +48,13 @@ const Chat = () => {
               <React.Fragment key={`${index++}`}>
                 <Text
                   m={
-                    m.from === user.id
+                    m.from === user?.id
                       ? "1rem 0 0 auto !important"
                       : "1rem auto 0 0 !important"
                   }
                   fontSize="lg"
                   color="gray.800"
-                  bg={m.from === user.id ? "red.300" : "gray.100"}
+                  bg={m.from === user?.id ? "red.300" : "gray.100"}
                   borderRadius="10px"
                   p="0.5rem 1rem"
                   maxWidth="50%"
@@ -88,7 +86,7 @@ const Chat = () => {
       fontSize="large"
     >
       <TabPanels>
-        <Text>No matches :( add a match to start chatting </Text>
+        <Text>No matches :(online. add a match to start chatting </Text>
       </TabPanels>
     </VStack>
   );
