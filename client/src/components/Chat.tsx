@@ -86,7 +86,7 @@ const Chat = () => {
       textAlign="center"
       fontSize="large"
     >
-      <TabPanels>
+      <TabPanels h="70vh">
         <Text>No matches :(online. add a match to start chatting </Text>
       </TabPanels>
     </VStack>
